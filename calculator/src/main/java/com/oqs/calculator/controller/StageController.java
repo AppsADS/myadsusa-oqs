@@ -1,69 +1,46 @@
 package com.oqs.calculator.controller;
 
 import com.oqs.calculator.model.Stage;
-import com.oqs.calculator.repository.StageRepository;
+import com.oqs.calculator.service.StageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/stages")
 public class StageController {
 
     @Autowired
-    private StageRepository stageRepository;
+    private StageService stageService;
 
-    // GET: Retrieve all stages
+    // Get all stages
     @GetMapping
     public List<Stage> getAllStages() {
-        return stageRepository.findAll();
+        return stageService.getAllStages();
     }
 
-    // GET: Retrieve a single stage by ID
+    // Get a stage by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Stage> getStageById(@PathVariable Long id) {
-        Optional<Stage> stage = stageRepository.findById(id);
-        return stage.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Stage getStageById(@PathVariable Long id) {
+        return stageService.getStageById(id);
     }
 
-    // POST: Create a new stage
+    // Create a new stage
     @PostMapping
-    public ResponseEntity<Stage> createStage(@Valid @RequestBody Stage stage) {
-        Stage savedStage = stageRepository.save(stage);
-        return ResponseEntity.ok(savedStage);
+    public Stage createStage(@RequestBody Stage stage) {
+        return stageService.saveStage(stage);
     }
 
-    // PUT: Update an existing stage by ID
+    // Update an existing stage
     @PutMapping("/{id}")
-    public ResponseEntity<Stage> updateStage(@PathVariable Long id, @Valid @RequestBody Stage stageDetails) {
-        Optional<Stage> optionalStage = stageRepository.findById(id);
-
-        if (!optionalStage.isPresent()) {
-            return ResponseEntity.notFound().build(); // Stage not found
-        }
-
-        Stage existingStage = optionalStage.get();
-        existingStage.setName(stageDetails.getName());
-        existingStage.setDescription(stageDetails.getDescription());
-
-        Stage updatedStage = stageRepository.save(existingStage);
-        return ResponseEntity.ok(updatedStage);
+    public Stage updateStage(@PathVariable Long id, @RequestBody Stage stage) {
+        return stageService.updateStage(id, stage);
     }
 
-    // DELETE: Remove a stage by ID
+    // Delete a stage
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStage(@PathVariable Long id) {
-        Optional<Stage> optionalStage = stageRepository.findById(id);
-        if (!optionalStage.isPresent()) {
-            return ResponseEntity.notFound().build(); // Stage not found
-        }
-
-        stageRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public void deleteStage(@PathVariable Long id) {
+        stageService.deleteStage(id);
     }
 }

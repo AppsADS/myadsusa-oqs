@@ -10,12 +10,10 @@ public class Stage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Stage name cannot be null")
     private String name;
-
     private String description;
 
-    // Constructors
+    //Constructor
     public Stage() {}
 
     public Stage(String name, String description) {

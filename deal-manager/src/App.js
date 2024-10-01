@@ -1,15 +1,14 @@
 import React from 'react';
-import DealList from './components/DealList'; // Adjust path if necessary
-import StageList from './components/StageList'; // Adjust path if necessary
+import './styles/style.css'; // Adjust the path if necessary6
+import StageList from './components/StageList';
 
 function App() {
-  return (
-      <div className="App">
-        <h1>Deal Manager</h1>
-        <DealList /> {/* This will render the Deal List */}
-        <StageList /> {/* This will render the Stage List */}
-      </div>
-  );
+    return (
+        <div className="App">
+            <h1>Order Quote System</h1>
+            <StageList />
+        </div>
+    );
 }
 
 export default App;

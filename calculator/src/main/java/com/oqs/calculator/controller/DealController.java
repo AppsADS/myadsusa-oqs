@@ -1,91 +1,46 @@
 package com.oqs.calculator.controller;
 
 import com.oqs.calculator.model.Deal;
-import com.oqs.calculator.model.Stage;
-import com.oqs.calculator.repository.DealRepository;
-import com.oqs.calculator.repository.StageRepository;
+import com.oqs.calculator.service.DealService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/deals")
 public class DealController {
 
     @Autowired
-    private DealRepository dealRepository;
+    private DealService dealService;
 
-    @Autowired
-    private StageRepository stageRepository;
-
-    // GET: Retrieve all deals
+    // Get all deals
     @GetMapping
     public List<Deal> getAllDeals() {
-        return dealRepository.findAll();
+        return dealService.getAllDeals();
     }
 
-    // GET: Retrieve a single deal by ID
+    // Get a deal by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Deal> getDealById(@PathVariable Long id) {
-        Optional<Deal> deal = dealRepository.findById(id);
-        return deal.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public Deal getDealById(@PathVariable Long id) {
+        return dealService.getDealById(id);
     }
 
-    // POST: Create a new deal
+    // Create a new deal
     @PostMapping
-    public ResponseEntity<Deal> createDeal(@RequestBody Deal deal) {
-        // Check if the Stage exists before saving the deal
-        if (deal.getStage() != null) {
-            Optional<Stage> stage = stageRepository.findById(deal.getStage().getId());
-            if (stage.isPresent()) {
-                deal.setStage(stage.get()); // Set the stage if it exists
-            } else {
-                return ResponseEntity.badRequest().body(null); // Stage doesn't exist
-            }
-        }
-        Deal savedDeal = dealRepository.save(deal);
-        return ResponseEntity.ok(savedDeal);
+    public Deal createDeal(@RequestBody Deal deal) {
+        return dealService.saveDeal(deal);
     }
 
-    // PUT: Update an existing deal
+    // Update an existing deal
     @PutMapping("/{id}")
-    public ResponseEntity<Deal> updateDeal(@PathVariable Long id, @RequestBody Deal dealDetails) {
-        Optional<Deal> optionalDeal = dealRepository.findById(id);
-
-        if (!optionalDeal.isPresent()) {
-            return ResponseEntity.notFound().build(); // Deal not found
-        }
-
-        Deal existingDeal = optionalDeal.get();
-        existingDeal.setName(dealDetails.getName());
-        existingDeal.setAmount(dealDetails.getAmount());
-
-        if (dealDetails.getStage() != null) {
-            Optional<Stage> stage = stageRepository.findById(dealDetails.getStage().getId());
-            if (stage.isPresent()) {
-                existingDeal.setStage(stage.get()); // Update stage if it exists
-            } else {
-                return ResponseEntity.badRequest().body(null); // Stage doesn't exist
-            }
-        }
-
-        Deal updatedDeal = dealRepository.save(existingDeal);
-        return ResponseEntity.ok(updatedDeal);
+    public Deal updateDeal(@PathVariable Long id, @RequestBody Deal deal) {
+        return dealService.updateDeal(id, deal);
     }
 
-    // DELETE: Remove a deal by ID
+    // Delete a deal
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteDeal(@PathVariable Long id) {
-        Optional<Deal> optionalDeal = dealRepository.findById(id);
-        if (!optionalDeal.isPresent()) {
-            return ResponseEntity.notFound().build(); // Deal not found
-        }
-
-        dealRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public void deleteDeal(@PathVariable Long id) {
+        dealService.deleteDeal(id);
     }
 }

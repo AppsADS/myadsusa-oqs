@@ -1,70 +1,61 @@
-import React, { useState, useEffect } from 'react';
-import api from '../services/api';
+import React, { useState } from "react";
+import axios from "axios";
 
-const StageForm = ({ stageId }) => {
-    const [stage, setStage] = useState({ name: '', description: '' });
+const StageForm = ({ onStageAdded }) => {
+    const [stage, setStage] = useState({
+        name: "",
+        description: ""
+    });
 
-    useEffect(() => {
-        if (stageId) {
-            fetchStage();
-        }
-    }, [stageId]);
-
-    const fetchStage = async () => {
-        try {
-            const response = await api.get(`/stages/${stageId}`);
-            setStage(response.data);
-        } catch (error) {
-            console.error("Error fetching stage:", error);
-        }
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setStage({ ...stage, [name]: value });
     };
 
-    const handleChange = (e) => {
-        setStage({ ...stage, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            if (stageId) {
-                await api.put(`/stages/${stageId}`, stage);
-            } else {
-                await api.post('/stages', stage);
-            }
-            alert('Stage saved successfully!');
-            setStage({ name: '', description: '' }); // Clear form after saving
-        } catch (error) {
-            console.error("Error saving stage:", error);
-        }
+        axios
+            .post("http://localhost:8080/api/stages", stage)
+            .then((response) => {
+                onStageAdded(response.data);
+                setStage({
+                    name: "",
+                    description: ""
+                });
+            })
+            .catch((error) => {
+                console.error("There was an error creating the stage!", error);
+            });
     };
 
     return (
-        <div className="container">
-            <h2>{stageId ? "Update Stage" : "Create Stage"}</h2>
+        <div className="stage-form">
+            <h2>Create New Stage</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Stage Name</label>
                     <input
                         type="text"
-                        className="form-control"
+                        id="name"
                         name="name"
                         value={stage.name}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Stage Description</label>
                     <input
                         type="text"
-                        className="form-control"
+                        id="description"
                         name="description"
                         value={stage.description}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
+                        required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">
-                    {stageId ? "Update Stage" : "Create Stage"}
+                <button type="submit" className="btn-submit">
+                    Add Stage
                 </button>
             </form>
         </div>
