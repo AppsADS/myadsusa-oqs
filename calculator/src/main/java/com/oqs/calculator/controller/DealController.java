@@ -1,10 +1,9 @@
 package com.oqs.calculator.controller;
 
 import com.oqs.calculator.model.Deal;
-import com.oqs.calculator.repository.DealRepository;
 import com.oqs.calculator.model.Stage;
+import com.oqs.calculator.repository.DealRepository;
 import com.oqs.calculator.repository.StageRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

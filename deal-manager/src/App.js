@@ -1,24 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import DealList from './components/DealList'; // Adjust path if necessary
+import StageList from './components/StageList'; // Adjust path if necessary
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <h1>Deal Manager</h1>
+        <DealList /> {/* This will render the Deal List */}
+        <StageList /> {/* This will render the Stage List */}
+      </div>
   );
 }
 
