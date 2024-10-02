@@ -1,9 +1,9 @@
 package com.oqs.calculator.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "stage")
 public class Stage {
 
     @Id
