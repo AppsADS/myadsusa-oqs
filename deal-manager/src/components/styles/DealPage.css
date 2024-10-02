@@ -1,0 +1,27 @@
+.deal-page {
+    display: flex;
+    height: 100vh;
+}
+
+.left-pane {
+    width: 20%;
+    background-color: #f4f5f7;
+    padding: 20px;
+}
+
+.center-area {
+    flex: 1;
+    padding: 20px;
+}
+
+.summary-section, .details-section, .focus-section, .history-section {
+    margin-bottom: 20px;
+}
+
+h2, h3 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin: 5px 0;
+}

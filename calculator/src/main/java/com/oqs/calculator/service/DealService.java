@@ -10,38 +10,40 @@ import java.util.List;
 @Service
 public class DealService {
 
-    @Autowired
-    private DealRepository dealRepository;
+    private final DealRepository dealRepository;
 
-    // Get all deals
+    @Autowired
+    public DealService(DealRepository dealRepository) {
+        this.dealRepository = dealRepository;
+    }
+
     public List<Deal> getAllDeals() {
         return dealRepository.findAll();
     }
 
-    // Get a deal by its ID
     public Deal getDealById(Long id) {
-        return dealRepository.findById(id).orElseThrow(() -> new RuntimeException("Deal not found"));
+        return dealRepository.findById(id).orElse(null); // Returns null if the deal is not found
     }
 
-    // Create a new deal
-    public Deal saveDeal(Deal deal) {
+    public Deal createDeal(Deal deal) {
         return dealRepository.save(deal);
     }
 
-    // Update an existing deal
-    public Deal updateDeal(Long id, Deal updatedDeal) {
-        Deal existingDeal = dealRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Deal not found"));
-
-        existingDeal.setName(updatedDeal.getName());
-        existingDeal.setAmount(updatedDeal.getAmount());
-        existingDeal.setStage(updatedDeal.getStage());
-
-        return dealRepository.save(existingDeal);
+    public Deal updateDeal(Long id, Deal deal) {
+        return dealRepository.findById(id).map(existingDeal -> {
+            existingDeal.setName(deal.getName());
+            existingDeal.setAmount(deal.getAmount());
+            existingDeal.setStage(deal.getStage());
+            return dealRepository.save(existingDeal);
+        }).orElse(null);  // Returns null if the deal to be updated is not found
     }
 
-    // Delete a deal by its ID
-    public void deleteDeal(Long id) {
-        dealRepository.deleteById(id);
+    public boolean deleteDeal(Long id) {
+        if (dealRepository.existsById(id)) {
+            dealRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
