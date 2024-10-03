@@ -1,47 +1,65 @@
 package com.oqs.calculator.service;
 
 import com.oqs.calculator.model.Deal;
+import com.oqs.calculator.model.Stage;
 import com.oqs.calculator.repository.DealRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.oqs.calculator.repository.StageRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DealService {
 
-    @Autowired
-    private DealRepository dealRepository;
+    private final DealRepository dealRepository;
+    private final StageRepository stageRepository;
 
-    // Get all deals
+    public DealService(DealRepository dealRepository, StageRepository stageRepository) {
+        this.dealRepository = dealRepository;
+        this.stageRepository = stageRepository;
+    }
+
     public List<Deal> getAllDeals() {
         return dealRepository.findAll();
     }
 
-    // Get a deal by its ID
-    public Deal getDealById(Long id) {
-        return dealRepository.findById(id).orElseThrow(() -> new RuntimeException("Deal not found"));
-    }
-
-    // Create a new deal
-    public Deal saveDeal(Deal deal) {
-        return dealRepository.save(deal);
+    // Fetch a deal by ID
+    public Optional<Deal> getDealById(Long id) {
+        return dealRepository.findById(id);
     }
 
     // Update an existing deal
     public Deal updateDeal(Long id, Deal updatedDeal) {
-        Deal existingDeal = dealRepository.findById(id)
+        return dealRepository.findById(id)
+                .map(deal -> {
+                    // Set action items and any other updated fields
+                    deal.setOrderReviewApproved(updatedDeal.getOrderReviewApproved());
+                    deal.setLocalOrderPlaceholder(updatedDeal.getLocalOrderPlaceholder());
+                    deal.setCustomerQuestionnaireCompleted(updatedDeal.getCustomerQuestionnaireCompleted());
+                    deal.setScheduleConfirmed(updatedDeal.getScheduleConfirmed());
+                    deal.setBillingComplete(updatedDeal.getBillingComplete());
+                    deal.setFundingComplete(updatedDeal.getFundingComplete());
+                    deal.setSubmittedForPayroll(updatedDeal.getSubmittedForPayroll());
+                    deal.setPendingFinalApproval(updatedDeal.getPendingFinalApproval());
+                    deal.setBeingPaid(updatedDeal.getBeingPaid());
+
+                    // Add any additional fields to update
+                    return dealRepository.save(deal); // Save the updated deal
+                })
                 .orElseThrow(() -> new RuntimeException("Deal not found"));
-
-        existingDeal.setName(updatedDeal.getName());
-        existingDeal.setAmount(updatedDeal.getAmount());
-        existingDeal.setStage(updatedDeal.getStage());
-
-        return dealRepository.save(existingDeal);
     }
 
-    // Delete a deal by its ID
-    public void deleteDeal(Long id) {
-        dealRepository.deleteById(id);
+    public Deal updateDealStage(Long dealId, Long stageId) {
+        return dealRepository.findById(dealId)
+                .map(deal -> {
+                    Stage newStage = stageRepository.findById(stageId)
+                            .orElseThrow(() -> new RuntimeException("Stage not found"));
+                    deal.setStage(newStage);
+                    return dealRepository.save(deal);
+                })
+                .orElseThrow(() -> new RuntimeException("Deal not found"));
     }
+
 }
+

@@ -1,0 +1,93 @@
+/* Container */
+.deal-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Deal Summary Section */
+.deal-summary {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.deal-summary h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.deal-summary p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Action Items */
+.deal-action-items {
+    margin-top: 20px;
+}
+
+.deal-action-items h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.deal-action-items ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.deal-action-items ul li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+/* Focus and History Sections */
+.deal-focus-history {
+    flex: 1.5;
+}
+
+.deal-focus, .deal-history {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.deal-focus h3, .deal-history h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.deal-focus p, .deal-history p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Align the two panes */
+@media (min-width: 1024px) {
+    .deal-details-container {
+        flex-direction: row;
+    }
+
+    .deal-summary {
+        max-width: 45%;
+    }
+
+    .deal-focus-history {
+        max-width: 50%;
+    }
+}

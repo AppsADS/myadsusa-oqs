@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stages")
+@RequestMapping("/stages")
 public class StageController {
+    // Rest of the code remains the same
+
+
 
     @Autowired
     private StageService stageService;
