@@ -2,45 +2,41 @@ package com.oqs.calculator.controller;
 
 import com.oqs.calculator.model.Deal;
 import com.oqs.calculator.service.DealService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/deals")
+@RequestMapping("/deals")
 public class DealController {
+    private final DealService dealService;
 
-    @Autowired
-    private DealService dealService;
+    public DealController(DealService dealService) {
+        this.dealService = dealService;
+    }
 
-    // Get all deals
     @GetMapping
     public List<Deal> getAllDeals() {
         return dealService.getAllDeals();
     }
 
-    // Get a deal by ID
     @GetMapping("/{id}")
-    public Deal getDealById(@PathVariable Long id) {
-        return dealService.getDealById(id);
+    public ResponseEntity<Deal> getDealById(@PathVariable Long id) {
+        Optional<Deal> deal = dealService.getDealById(id);
+        return deal.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Create a new deal
-    @PostMapping
-    public Deal createDeal(@RequestBody Deal deal) {
-        return dealService.saveDeal(deal);
-    }
-
-    // Update an existing deal
     @PutMapping("/{id}")
-    public Deal updateDeal(@PathVariable Long id, @RequestBody Deal deal) {
-        return dealService.updateDeal(id, deal);
-    }
-
-    // Delete a deal
-    @DeleteMapping("/{id}")
-    public void deleteDeal(@PathVariable Long id) {
-        dealService.deleteDeal(id);
+    public ResponseEntity<Deal> updateDeal(@PathVariable Long id, @RequestBody Deal updatedDeal) {
+        try {
+            Deal deal = dealService.updateDeal(id, updatedDeal);
+            return ResponseEntity.ok(deal);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
+

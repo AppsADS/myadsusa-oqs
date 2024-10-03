@@ -21,6 +21,15 @@ public class Deal {
     @JoinColumn(name = "stage_id", nullable = false)  // Foreign key to Stage entity
     @NotNull(message = "Deal must have a stage")
     private Stage stage;
+    private Boolean orderReviewApproved;
+    private String localOrderPlaceholder;
+    private Boolean customerQuestionnaireCompleted;
+    private Boolean scheduleConfirmed;
+    private Boolean billingComplete;
+    private Boolean fundingComplete;
+    private Boolean submittedForPayroll;
+    private Boolean pendingFinalApproval;
+    private Boolean beingPaid;
 
     // Constructors
     public Deal() {}
@@ -63,4 +72,76 @@ public class Deal {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+    public Boolean getOrderReviewApproved() {
+        return orderReviewApproved;
+    }
+
+    public void setOrderReviewApproved(Boolean orderReviewApproved) {
+        this.orderReviewApproved = orderReviewApproved;
+    }
+
+    public String getLocalOrderPlaceholder() {
+        return localOrderPlaceholder;
+    }
+
+    public void setLocalOrderPlaceholder(String localOrderPlaceholder) {
+        this.localOrderPlaceholder = localOrderPlaceholder;
+    }
+
+    public Boolean getCustomerQuestionnaireCompleted() {
+        return customerQuestionnaireCompleted;
+    }
+
+    public void setCustomerQuestionnaireCompleted(Boolean customerQuestionnaireCompleted) {
+        this.customerQuestionnaireCompleted = customerQuestionnaireCompleted;
+    }
+
+    public Boolean getScheduleConfirmed() {
+        return scheduleConfirmed;
+    }
+
+    public void setScheduleConfirmed(Boolean scheduleConfirmed) {
+        this.scheduleConfirmed = scheduleConfirmed;
+    }
+
+    public Boolean getBillingComplete() {
+        return billingComplete;
+    }
+
+    public void setBillingComplete(Boolean billingComplete) {
+        this.billingComplete = billingComplete;
+    }
+
+    public Boolean getFundingComplete() {
+        return fundingComplete;
+    }
+
+    public void setFundingComplete(Boolean fundingComplete) {
+        this.fundingComplete = fundingComplete;
+    }
+
+    public Boolean getSubmittedForPayroll() {
+        return submittedForPayroll;
+    }
+
+    public void setSubmittedForPayroll(Boolean submittedForPayroll) {
+        this.submittedForPayroll = submittedForPayroll;
+    }
+
+    public Boolean getPendingFinalApproval() {
+        return pendingFinalApproval;
+    }
+
+    public void setPendingFinalApproval(Boolean pendingFinalApproval) {
+        this.pendingFinalApproval = pendingFinalApproval;
+    }
+
+    public Boolean getBeingPaid() {
+        return beingPaid;
+    }
+
+    public void setBeingPaid(Boolean beingPaid) {
+        this.beingPaid = beingPaid;
+    }
+
 }
