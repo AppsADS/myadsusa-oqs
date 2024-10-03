@@ -38,5 +38,12 @@ public class DealController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{id}/stage")
+    public ResponseEntity<Deal> updateDealStage(@PathVariable Long id, @RequestBody Long stageId) {
+        Deal updatedDeal = dealService.updateDealStage(id, stageId);
+        return ResponseEntity.ok(updatedDeal);
+    }
+
+
 }
 
