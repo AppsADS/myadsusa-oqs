@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/calculator/src/main/java/com/oqs/calculator/controller/DealController.java;C:/Workspace/oqs/calculator/src/main/java/com/oqs/calculator/controller/StageController.java;C:/Workspace/oqs/calculator/src/main/java/com/oqs/calculator/model/Deal.java;C:/Workspace/oqs/calculator/src/main/java/com/oqs/calculator/model/Stage.java;C:/Workspace/oqs/calculator/src/main/java/com/oqs/calculator/CalculatorApplication.java;C:/Workspace/oqs/calculator/src/test/java/com/oqs/calculator/CalculatorApplicationTests.java;C:/Workspace/oqs/calculator/pom.xml" />
+  </component>
+</project>

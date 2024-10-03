@@ -3,6 +3,7 @@ package com.oqs.calculator.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "stage")
 public class Stage {
 
     @Id
