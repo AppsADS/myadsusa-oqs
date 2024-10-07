@@ -1,5 +1,6 @@
 {
   "homepage": "https://AppsADS.github.io/myadsusa-oqs",
+  "proxy": "https://myadsusa-oqs-back.herokuapp.com",
   "name": "deal-manager",
   "version": "0.1.0",
   "private": true,
