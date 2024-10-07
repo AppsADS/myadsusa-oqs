@@ -12,7 +12,7 @@ const DealForm = ({ onDealAdded }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8080/api/stages")
+            .get("https://myadsusa-oqs-back.herokuapp.com/api/stages")
             .then((response) => {
                 setStages(response.data);
             })

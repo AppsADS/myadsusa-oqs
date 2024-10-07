@@ -9,13 +9,13 @@ const StageList = () => {
 
     useEffect(() => {
         // Fetch stages and deals when the component mounts
-        axios.get('http://localhost:8080/api/stages')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/stages')
             .then(response => {
                 setStages(response.data);
             })
             .catch(error => console.error('Error fetching stages:', error));
 
-        axios.get('http://localhost:8080/api/deals')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/deals')
             .then(response => {
                 setDeals(response.data);
             })
