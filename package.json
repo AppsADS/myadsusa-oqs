@@ -1,4 +1,5 @@
 {
+  "homepage": "https://appsads.github.io/myadsusa-oqs",
   "name": "deal-manager",
   "version": "0.1.0",
   "private": true,
@@ -45,7 +46,5 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
-  },
-  "homepage": "https://appsads.github.io/myadsusa-oqs"
-
+  }
 }
