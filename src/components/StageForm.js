@@ -15,7 +15,7 @@ const StageForm = ({ onStageAdded }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8080/api/stages", stage)
+            .post("https://myadsusa-oqs-back.herokuapp.com/api/stages", stage)
             .then((response) => {
                 onStageAdded(response.data);
                 setStage({

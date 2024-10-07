@@ -13,7 +13,7 @@ const DealDetail = () => {
 
     useEffect(() => {
         // Fetch deal details by ID
-        axios.get(`http://localhost:8080/api/deals/${id}`)
+        axios.get(`https://myadsusa-oqs-back.herokuapp.com/api/deals/${id}`)
             .then(response => {
                 console.log("Deal Data: ", response.data); // Debugging log
                 setDeal(response.data);
@@ -24,7 +24,7 @@ const DealDetail = () => {
                 setLoading(false);
 
         // Fetch all stages for the dropdown
-        axios.get('http://localhost:8080/api/stages')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/stages')
             .then(response => {
                 console.log("Stages Data: ", response.data); // Debugging log
                 setStages(response.data); // Populate stages
@@ -38,7 +38,7 @@ const DealDetail = () => {
     };
 
     const updateStage = () => {
-        axios.put(`http://localhost:8080/api/deals/${id}/stage`, selectedStage, {
+        axios.put(`https://myadsusa-oqs-back.herokuapp.com/api/deals/${id}/stage`, selectedStage, {
             headers: {
                 'Content-Type': 'application/json'
             }

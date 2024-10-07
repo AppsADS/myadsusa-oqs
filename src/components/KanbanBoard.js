@@ -51,11 +51,11 @@ function KanbanBoard() {
     const [deals, setDeals] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/api/stages')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/stages')
             .then(response => setStages(response.data))
             .catch(error => console.error(error));
 
-        axios.get('http://localhost:8080/api/deals')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/deals')
             .then(response => setDeals(response.data))
             .catch(error => console.error(error));
     }, []);
@@ -66,7 +66,7 @@ function KanbanBoard() {
         const deal = deals.find(d => d.id === dealId);
         if (deal) {
             // Update the deal's stage
-            axios.put(`http://localhost:8080/api/deals/${dealId}`, { ...deal, stage: { id: newStageId } })
+            axios.put(`https://myadsusa-oqs-back.herokuapp.com/api/deals/${dealId}`, { ...deal, stage: { id: newStageId } })
                 .then(response => {
                     // Update the frontend state
                     setDeals(deals.map(d => d.id === dealId ? { ...d, stage: { id: newStageId } } : d));

@@ -6,7 +6,7 @@ const DealList = () => {
 
     useEffect(() => {
         // Fetch deals when the component mounts
-        axios.get('http://localhost:8080/api/deals')
+        axios.get('https://myadsusa-oqs-back.herokuapp.com/api/deals')
             .then(response => {
                 setDeals(response.data);
             })
