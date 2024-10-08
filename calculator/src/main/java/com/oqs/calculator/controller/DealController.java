@@ -21,7 +21,7 @@ public class DealController {
         this.dealService = dealService;
     }
 
-    @GetMapping
+    @GetMapping("/deals")
     public List<Deal> getAllDeals() {
         return dealService.getAllDeals();
     }

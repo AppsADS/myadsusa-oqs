@@ -10,12 +10,12 @@ const Board = () => {
     useEffect(() => {
         // Fetch stages and deals from the API
         const fetchStages = async () => {
-            const stagesRes = await axios.get('https://myadsusa-oqs.herokuapp.com/api/stages');
+            const stagesRes = await axios.get('https://myadsusa-oqs.ue.r.appspot.com/api/stages');
             setStages(stagesRes.data);
         };
 
         const fetchDeals = async () => {
-            const dealsRes = await axios.get('https://myadsusa-oqs.herokuapp.com/api/deals');
+            const dealsRes = await axios.get('https://myadsusa-oqs.ue.r.appspot.com/api/deals');
             setDeals(dealsRes.data);
         };
 
@@ -54,7 +54,7 @@ const Board = () => {
 
         // Send the update request to the backend
         try {
-            await axios.put(`https://myadsusa-oqs.herokuapp.com/api/deals/${draggedDeal.id}`, updatedDeal);
+            await axios.put(`https://myadsusa-oqs.ue.r.appspot.com/api/deals/${draggedDeal.id}`, updatedDeal);
         } catch (error) {
             console.error('Failed to update the deal', error);
         }

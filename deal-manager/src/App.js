@@ -9,7 +9,7 @@ import axios from "axios";
 
 function App() {
     const [data, setData] = useState(null);
-    const apiUrl = "https://myadsusa-oqs-back.herokuapp.com/api/stages";
+    const apiUrl = "https://myadsusa-oqs.ue.r.appspot.com/api/stages";
 
     useEffect(() => {
         axios.get(apiUrl)

@@ -70,12 +70,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<!-- Specify the main class of your Spring Boot application -->
-					<mainClass>com.oqs.calculator.CalculatorApplication</mainClass>
-				</configuration>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+
 
 </project>

@@ -12,7 +12,7 @@ const DealCard = ({ deal }) => {
 
         // Send the PUT request to update on backend
         try {
-            await axios.put(`https://myadsusa-oqs.herokuapp.com/api/deals/${deal.id}`, updatedDeal);
+            await axios.put(`https://myadsusa-oqs.ue.r.appspot.com/api/deals/${deal.id}`, updatedDeal);
             alert('Stage updated successfully!');
         } catch (error) {
             console.error('Failed to update the deal stage', error);
