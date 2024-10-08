@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/myadsusa-oqs/static/css/main.c8fc3886.css",
+    "main.js": "/myadsusa-oqs/static/js/main.f86953f1.js",
+    "index.html": "/myadsusa-oqs/index.html",
+    "main.c8fc3886.css.map": "/myadsusa-oqs/static/css/main.c8fc3886.css.map",
+    "main.f86953f1.js.map": "/myadsusa-oqs/static/js/main.f86953f1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c8fc3886.css",
+    "static/js/main.f86953f1.js"
+  ]
+}
