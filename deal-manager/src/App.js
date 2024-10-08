@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StageList from './components/StageList.js'; // Assuming you have StageList component
 import DealDetail from './components/DealDetail.js'; // Assuming this component shows a deal's detail
-import DealPage from './components/DealPage.js';
 import './components/styles/style.css'; // Adjust the path if necessary
 import './components/styles/DealPage.css';
 import './components/styles/DealDetail.css';
+import axios from "axios";
 
 function App() {
     const [data, setData] = useState(null);
