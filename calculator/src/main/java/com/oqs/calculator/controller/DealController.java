@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
+//@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class DealController {
@@ -17,6 +19,11 @@ public class DealController {
 
     public DealController(DealService dealService) {
         this.dealService = dealService;
+    }
+
+    @GetMapping
+    public List<Deal> getAllDeals() {
+        return dealService.getAllDeals();
     }
 
     @GetMapping("/stages")
@@ -29,10 +36,6 @@ public class DealController {
         return "Backend is running";
     }
 
-    @GetMapping
-    public List<Deal> getAllDeals() {
-        return dealService.getAllDeals();
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Deal> getDealById(@PathVariable Long id) {

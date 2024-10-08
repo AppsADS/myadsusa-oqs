@@ -8,6 +8,20 @@ import './components/styles/DealPage.css';
 import './components/styles/DealDetail.css';
 
 function App() {
+    const [data, setData] = useState(null);
+    const apiUrl = "https://myadsusa-oqs-back.herokuapp.com/api/stages";
+
+    useEffect(() => {
+        axios.get(apiUrl)
+            .then(response => {
+                setData(response.data);
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error("There was an error making the request!", error);
+            });
+    }, []);
+
     return (
         <Router>
             <div className="App">
@@ -18,9 +32,8 @@ function App() {
                     {/* Route for the deal detail page */}
                     <Route path="/deal/:id" element={<DealDetail />} />
 
-                    <Route path="/deal/:id" component={DealPage} />
-
-                    <Route path="/deal/:id" component={DealDetail} />
+                    {/* You can remove these redundant routes */}
+                    {/* <Route path="/deal/:id" component={DealPage} /> */}
 
                 </Routes>
             </div>
