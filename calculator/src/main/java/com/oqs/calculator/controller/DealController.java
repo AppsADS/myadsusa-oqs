@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
-
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
 @RestController
 @RequestMapping("/api")
 public class DealController {
