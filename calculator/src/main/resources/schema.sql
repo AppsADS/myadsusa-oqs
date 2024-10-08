@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS deal (
                                     amount DECIMAL NOT NULL,
                                     stage_id BIGINT NOT NULL,
                                     FOREIGN KEY (stage_id) REFERENCES stage(id)
-);
+    );

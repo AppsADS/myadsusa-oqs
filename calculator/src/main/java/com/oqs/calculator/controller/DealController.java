@@ -1,6 +1,7 @@
 package com.oqs.calculator.controller;
 
 import com.oqs.calculator.model.Deal;
+import com.oqs.calculator.model.Stage;
 import com.oqs.calculator.service.DealService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,14 +9,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
+
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/deals")
+@RequestMapping("/api")
 public class DealController {
     private final DealService dealService;
 
     public DealController(DealService dealService) {
         this.dealService = dealService;
+    }
+
+    @GetMapping("/stages")
+    public List<Stage> getAllStages() {
+        return dealService.getAllStages(); // Ensure that dealService is returning the list of stages
+    }
+
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "Backend is running";
     }
 
     @GetMapping
@@ -46,4 +59,5 @@ public class DealController {
 
 
 }
+
 

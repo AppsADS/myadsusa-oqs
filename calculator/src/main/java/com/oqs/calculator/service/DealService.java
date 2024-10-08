@@ -19,6 +19,9 @@ public class DealService {
         this.dealRepository = dealRepository;
         this.stageRepository = stageRepository;
     }
+    public List<Stage> getAllStages() {
+        return stageRepository.findAll(); // Assuming you're using JPA Repository
+    }
 
     public List<Deal> getAllDeals() {
         return dealRepository.findAll();

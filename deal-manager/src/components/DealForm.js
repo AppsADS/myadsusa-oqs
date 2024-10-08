@@ -12,7 +12,7 @@ const DealForm = ({ onDealAdded }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8080/api/stages")
+            .get("https://myadsusa-oqs.herokuapp.com/api/stages")
             .then((response) => {
                 setStages(response.data);
             })
@@ -29,7 +29,7 @@ const DealForm = ({ onDealAdded }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8080/api/deals", {
+            .post("https://myadsusa-oqs.herokuapp.com/api/deals", {
                 ...deal,
                 stage: { id: deal.stageId } // Sending stage object as per the backend requirement
             })
