@@ -2,37 +2,39 @@ package com.oqs.calculator.service;
 
 import com.oqs.calculator.model.Stage;
 import com.oqs.calculator.repository.StageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.oqs.calculator.exception.StageNotFoundException;  // Custom Exception
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class StageService {
 
-    @Autowired
-    private StageRepository stageRepository;
+    private final StageRepository stageRepository;
 
-    // Get all stages
+    public StageService(StageRepository stageRepository) {
+        this.stageRepository = stageRepository;
+    }
+
     public List<Stage> getAllStages() {
         return stageRepository.findAll();
     }
 
-    // Get a stage by its ID
     public Stage getStageById(Long id) {
         return stageRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Stage not found"));
+                .orElseThrow(() -> new StageNotFoundException(id));  // Using custom exception
     }
 
-    // Create a new stage
+    @Transactional
     public Stage saveStage(Stage stage) {
         return stageRepository.save(stage);
     }
 
-    // Update an existing stage
+    @Transactional
     public Stage updateStage(Long id, Stage updatedStage) {
         Stage existingStage = stageRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Stage not found"));
+                .orElseThrow(() -> new StageNotFoundException(id));  // Using custom exception
 
         existingStage.setName(updatedStage.getName());
         existingStage.setDescription(updatedStage.getDescription());
@@ -40,8 +42,11 @@ public class StageService {
         return stageRepository.save(existingStage);
     }
 
-    // Delete a stage by its ID
+    @Transactional
     public void deleteStage(Long id) {
+        if (!stageRepository.existsById(id)) {
+            throw new StageNotFoundException(id);  // Using custom exception
+        }
         stageRepository.deleteById(id);
     }
 }

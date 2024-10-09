@@ -1,7 +1,7 @@
 package com.oqs.calculator.controller;
 
-import com.oqs.calculator.model.Deal;
 import com.oqs.calculator.model.Stage;
+import com.oqs.calculator.model.Deal;
 import com.oqs.calculator.service.DealService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "https://appsads.github.io/myadsusa-oqs")
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class DealController {
@@ -43,20 +41,24 @@ public class DealController {
         return deal.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<Deal> updateDeal(@PathVariable Long id, @RequestBody Deal updatedDeal) {
         try {
             Deal deal = dealService.updateDeal(id, updatedDeal);
             return ResponseEntity.ok(deal);
         } catch (RuntimeException e) {
+            // Log the error for better traceability
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/{id}/stage")
-    public ResponseEntity<Deal> updateDealStage(@PathVariable Long id, @RequestBody Long stageId) {
+
+    @PutMapping("/{id}/stage/{stageId}")
+    public ResponseEntity<Deal> updateDealStage(@PathVariable Long id, @PathVariable Long stageId) {
         Deal updatedDeal = dealService.updateDealStage(id, stageId);
         return ResponseEntity.ok(updatedDeal);
     }
+
 
 
 }

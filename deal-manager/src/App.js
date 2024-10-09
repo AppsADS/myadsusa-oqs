@@ -19,6 +19,7 @@ function App() {
             })
             .catch(error => {
                 console.error("There was an error making the request!", error);
+                setData({ error: 'Failed to fetch data' }); // Example of storing error state
             });
     }, []);
 
