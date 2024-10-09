@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/myadsusa-oqs/static/css/main.5e6ddfde.css",
-    "main.js": "/myadsusa-oqs/static/js/main.ba524a49.js",
+    "main.js": "/myadsusa-oqs/static/js/main.06f983db.js",
     "index.html": "/myadsusa-oqs/index.html",
     "main.5e6ddfde.css.map": "/myadsusa-oqs/static/css/main.5e6ddfde.css.map",
-    "main.ba524a49.js.map": "/myadsusa-oqs/static/js/main.ba524a49.js.map"
+    "main.06f983db.js.map": "/myadsusa-oqs/static/js/main.06f983db.js.map"
   },
   "entrypoints": [
     "static/css/main.5e6ddfde.css",
-    "static/js/main.ba524a49.js"
+    "static/js/main.06f983db.js"
   ]
 }
