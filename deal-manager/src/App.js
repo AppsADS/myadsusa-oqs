@@ -9,7 +9,7 @@ import axios from "axios";
 
 function App() {
     const [data, setData] = useState(null);
-    const apiUrl = "https://myadsusa-oqs-back.herokuapp.com/api/stages";
+    const apiUrl = "https://myadsusa-oqs.ue.r.appspot.com/api/stages";
 
     useEffect(() => {
         axios.get(apiUrl)
@@ -19,6 +19,7 @@ function App() {
             })
             .catch(error => {
                 console.error("There was an error making the request!", error);
+                setData({ error: 'Failed to fetch data' }); // Example of storing error state
             });
     }, []);
 

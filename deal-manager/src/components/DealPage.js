@@ -10,7 +10,7 @@ const DealPage = ({ match }) => {
 
     useEffect(() => {
         // Fetch deal data
-        axios.get(`https://myadsusa-oqs.herokuapp.com/api/deals/${dealId}`)
+        axios.get(`https://myadsusa-oqs.ue.r.appspot.com/api/deals/${dealId}`)
             .then(response => {
                 setDeal(response.data);
             })
