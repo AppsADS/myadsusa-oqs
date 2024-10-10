@@ -9,7 +9,7 @@ import axios from "axios";
 
 function App() {
     const [data, setData] = useState(null);
-    const apiUrl = "https://myadsusa-oqs.ue.r.appspot.com/api/stages";
+    const apiUrl = "https://myadsusa-oqs.appspot.com/api/stages";
 
     useEffect(() => {
         axios.get(apiUrl)
@@ -32,9 +32,6 @@ function App() {
 
                     {/* Route for the deal detail page */}
                     <Route path="/deal/:id" element={<DealDetail />} />
-
-                    {/* You can remove these redundant routes */}
-                    {/* <Route path="/deal/:id" component={DealPage} /> */}
 
                 </Routes>
             </div>

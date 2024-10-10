@@ -9,13 +9,13 @@ const StageList = () => {
 
     useEffect(() => {
         // Fetch stages and deals when the component mounts
-        axios.get('https://myadsusa-oqs.ue.r.appspot.com/api/stages')
+        axios.get('https://myadsusa-oqs.appspot.com/api/stages')
             .then(response => {
                 setStages(response.data);
             })
             .catch(error => console.error('Error fetching stages:', error));
 
-        axios.get('https://myadsusa-oqs.ue.r.appspot.com/api/deals')
+        axios.get('https://myadsusa-oqs.appspot.com/api/deals')
             .then(response => {
                 setDeals(response.data);
             })
